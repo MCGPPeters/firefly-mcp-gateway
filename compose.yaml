@@ -1,0 +1,53 @@
+# Firefly III MCP behind an OAuth 2.1 gateway.
+#
+# firefly-mcp stays on the internal network only. Nothing but the gateway
+# talks to it, so the Firefly PAT never leaves this compose project.
+services:
+  firefly-mcp:
+    image: ghcr.io/etnperlong/firefly-iii-mcp:latest
+    restart: unless-stopped
+    environment:
+      # The gateway injects both per request; these are the fallback.
+      FIREFLY_III_BASE_URL: ${FIREFLY_BASE_URL}
+      FIREFLY_III_PAT: ${FIREFLY_PAT}
+      PORT: "3000"
+    networks: [internal]
+    # Deliberately no ports: and no Traefik labels.
+
+  firefly-mcp-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: firefly-mcp-gateway:local
+    restart: unless-stopped
+    depends_on: [firefly-mcp]
+    environment:
+      ASPNETCORE_HTTP_PORTS: "8080"
+      Mcp__Resource: https://firefly-mcp.peters-elshoff.nl/mcp
+      Mcp__Issuer: https://keycloak.peters-elshoff.nl/realms/home
+      Mcp__ResourceMetadataUrl: https://firefly-mcp.peters-elshoff.nl/.well-known/oauth-protected-resource
+      Mcp__ScopesSupported__0: openid
+      Mcp__ScopesSupported__1: profile
+      Mcp__ScopesSupported__2: firefly-mcp
+      Mcp__RequiredScope: ""
+      Firefly__BaseUrl: ${FIREFLY_BASE_URL}
+      Firefly__PersonalAccessToken: ${FIREFLY_PAT}
+      ReverseProxy__Clusters__firefly-mcp__Destinations__primary__Address: http://firefly-mcp:3000/
+    networks: [internal, proxy]
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: proxy
+      traefik.http.routers.firefly-mcp.rule: Host(`firefly-mcp.peters-elshoff.nl`)
+      traefik.http.routers.firefly-mcp.entrypoints: websecure
+      traefik.http.routers.firefly-mcp.tls.certresolver: letsencrypt
+      traefik.http.services.firefly-mcp.loadbalancer.server.port: "8080"
+      # Anthropic's published egress range. This replaces the LAN ip-whitelist:
+      # the endpoint is reachable from the internet, but only from Claude.
+      traefik.http.routers.firefly-mcp.middlewares: anthropic-only@docker,secure-headers@file
+      traefik.http.middlewares.anthropic-only.ipallowlist.sourcerange: "160.79.104.0/21"
+
+networks:
+  internal:
+    internal: true
+  proxy:
+    external: true
