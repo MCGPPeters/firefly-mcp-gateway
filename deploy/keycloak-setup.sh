@@ -37,8 +37,12 @@ TOKEN=$(curl -sfS -X POST "$KC_URL/realms/master/protocol/openid-connect/token" 
 auth=(-H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json")
 
 # Fail early with a clear message rather than a confusing 404 later.
-curl -sfS "${auth[@]}" "$api" >/dev/null \
-  || { echo "realm '$KC_REALM' not found at $KC_URL" >&2; exit 1; }
+if ! curl -sfS "${auth[@]}" "$api" >/dev/null 2>&1; then
+  echo "realm '$KC_REALM' not found at $KC_URL" >&2
+  echo "realms this admin can see:" >&2
+  curl -sfS "${auth[@]}" "$KC_URL/admin/realms" 2>/dev/null | jq -r '.[].realm' | sed 's/^/  - /' >&2
+  exit 1
+fi
 
 # --- client scope -------------------------------------------------------------
 echo "==> Client scope '$SCOPE_NAME'"
