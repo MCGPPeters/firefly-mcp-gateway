@@ -257,7 +257,19 @@ Bearer eyJ0eXAiOiJKV1Qi...
 ```
 
 Trailing whitespace is trimmed, so an editor's newline does not corrupt the header.
-Tighten the permissions — `chmod 600` — since this token is full access to Firefly III.
+
+**The container runs as UID 1654, not root.** A root-owned `chmod 600` file is
+unreadable to it and the app dies at startup with `UnauthorizedAccessException`.
+Give the file to that UID:
+
+```bash
+sudo chown 1654:1654 /mnt/main/apps/firefly-mcp-gateway/secrets/firefly-pat
+sudo chmod 600 /mnt/main/apps/firefly-mcp-gateway/secrets/firefly-pat
+```
+
+`ls -ln` should then show `-rw------- 1 1654 1654`. A trailing `+` on the mode means
+an inherited ACL is still in force and may override the owner bits; the `chmod` above
+normally collapses it back to a trivial ACL.
 
 The same trick works for any key, and it is the better place for a secret in general:
 file permissions apply, and the value does not appear in `docker inspect`.
