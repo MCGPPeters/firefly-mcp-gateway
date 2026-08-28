@@ -1,24 +1,22 @@
 # Additive Traefik configuration for the Firefly III MCP gateway.
 #
-# Drop this beside base.yml in /mnt/main/apps/traefik/dynamic/. The file
-# provider runs with --providers.file.directory=/dynamic and watch=true, so
-# Traefik picks it up without a restart — and deleting this file reverts
-# everything it does.
+# Drop this beside base.yml in /mnt/main/apps/traefik/dynamic/. The file provider
+# runs with --providers.file.directory=/dynamic and watch=true, so Traefik picks
+# it up without a restart — and deleting this file reverts everything it does.
 #
-# Nothing here redefines anything base.yml already declares. It adds one
-# middleware and one router, and references base.yml's `secure-headers`
-# middleware and `keycloak` service by name: the file provider merges every
-# file in the directory into one configuration, so cross-file references
-# resolve. Redefining an existing name would collide, so don't.
+# Nothing here redefines anything base.yml already declares. It references that
+# file's `keycloak` service by name: the provider merges every file in the
+# directory into one configuration, so cross-file references resolve. Redefining
+# an existing name would collide, so don't.
 #
-# Two edits in base.yml are still required — see "base.yml changes" below.
+# Three edits in base.yml are still required — see the end of this file.
 
 http:
   middlewares:
     # base.yml's ip-whitelist ranges, plus Anthropic's published egress range.
-    # Claude reaches the MCP endpoint from 160.79.104.0/21 and nowhere else;
-    # the LAN ranges stay so you can still reach it yourself, and so Claude
-    # Code on your Mac works (its requests come from your IP, not Anthropic's).
+    # Claude reaches the MCP endpoint from 160.79.104.0/21 and nowhere else; the
+    # LAN ranges stay so you can still reach it yourself, and so Claude Code on
+    # your own machine works — its requests come from your IP, not Anthropic's.
     mcp-allowlist:
       ipAllowList:
         sourceRange:
@@ -28,7 +26,60 @@ http:
           - 100.64.0.0/10     # Tailscale
           - fd00::/8
 
+    # Identical to base.yml's secure-headers, but SAMEORIGIN instead of DENY.
+    # Keycloak frames its own login-status-iframe.html for session monitoring and
+    # already sends "frame-ancestors 'self'" itself. X-Frame-Options: DENY on top
+    # of that breaks the admin console without adding any protection.
+    secure-headers-keycloak:
+      headers:
+        sslRedirect: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        customFrameOptionsValue: SAMEORIGIN
+        contentTypeNosniff: true
+        referrerPolicy: no-referrer
+
   routers:
-    # Claude runs OIDC discovery and the token exchange against Keycloak from
-    # its own egress range, and you complete the consent screen from a browser
-    # that could be anywhere — mobile data included. Both need
+    # Claude runs OIDC discovery and the token exchange against Keycloak from its
+    # own egress range, and you complete the consent screen from a browser that
+    # could be anywhere, mobile data included. Both need the `home` realm, and
+    # /resources serves the login page's own CSS and JS.
+    #
+    # Everything else on this host — the admin console, the master realm — is left
+    # to base.yml's `keycloak` router and stays LAN-only. That is the point of
+    # splitting by path rather than opening the whole host.
+    keycloak-home-realm:
+      entryPoints: [websecure]
+      rule: "Host(`keycloak.peters-elshoff.nl`) && (PathPrefix(`/realms/home`) || PathPrefix(`/resources`))"
+      priority: 50
+      service: keycloak
+      middlewares: [secure-headers-keycloak]
+      tls:
+        certResolver: letsencrypt
+
+# ---------------------------------------------------------------------------
+# base.yml changes
+#
+# 1. Router `firefly-mcp` — send it through the new allowlist:
+#      middlewares: [secure-headers, ip-whitelist]
+#    becomes
+#      middlewares: [secure-headers, mcp-allowlist]
+#
+# 2. Service `firefly-mcp` — point at the gateway instead of the bare MCP
+#    server; the gateway proxies on to 30110 itself:
+#      url: "http://10.69.2.90:30110"
+#    becomes
+#      url: "http://10.69.2.90:30111"
+#
+# 3. Router `keycloak` — swap only the headers middleware and keep the allowlist,
+#    so the admin console and the master realm stay LAN-only:
+#      middlewares: [secure-headers, ip-whitelist]
+#    becomes
+#      middlewares: [secure-headers-keycloak, ip-whitelist]
+#
+# Leave router `firefly-mcp-redirect` alone; the :80 redirect is unaffected.
+#
+# Take a backup first, in the style you already use:
+#   cp base.yml base.yml.bak-gateway
+# ---------------------------------------------------------------------------
