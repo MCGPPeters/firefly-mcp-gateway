@@ -6,6 +6,49 @@ using Yarp.ReverseProxy.Transforms;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Any configuration key can be supplied as a file instead of an environment
+// variable: set <KEY>__FILE to a path and the file's contents become the value.
+//
+// This exists because a Firefly III personal access token is a JWT of well over
+// a thousand characters, and TrueNAS rejects environment values longer than 1024.
+// It is also the better place for a secret generally: file permissions apply, and
+// the value does not show up in `docker inspect`.
+var fileBackedSettings = new Dictionary<string, string?>();
+
+foreach (System.Collections.DictionaryEntry entry in Environment.GetEnvironmentVariables())
+{
+    var variable = (string)entry.Key;
+
+    if (!variable.EndsWith("__FILE", StringComparison.Ordinal))
+    {
+        continue;
+    }
+
+    var path = entry.Value as string;
+
+    if (string.IsNullOrWhiteSpace(path))
+    {
+        continue;
+    }
+
+    if (!File.Exists(path))
+    {
+        throw new InvalidOperationException(
+            $"{variable} points at '{path}', which does not exist inside the container.");
+    }
+
+    // Trailing newlines are easy to introduce with an editor and would corrupt
+    // a header value, so trim rather than pass the bytes through verbatim.
+    var key = variable[..^"__FILE".Length].Replace("__", ":");
+    fileBackedSettings[key] = File.ReadAllText(path).Trim();
+}
+
+if (fileBackedSettings.Count > 0)
+{
+    // Added last, so it wins over the plain environment variable of the same name.
+    builder.Configuration.AddInMemoryCollection(fileBackedSettings);
+}
+
 var mcp = builder.Configuration.GetSection("Mcp").Get<McpOptions>()
           ?? throw new InvalidOperationException("Configuration section 'Mcp' is missing.");
 mcp.Validate();

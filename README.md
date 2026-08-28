@@ -226,7 +226,7 @@ Mcp__Issuer = https://keycloak.peters-elshoff.nl/realms/home
 Mcp__ScopesSupported__0 = openid
 Mcp__ScopesSupported__1 = profile
 Mcp__ScopesSupported__2 = firefly-mcp
-Upstream__Headers__Authorization = Bearer <Firefly III PAT>
+Upstream__Headers__Authorization__FILE = /secrets/firefly-pat
 Upstream__Headers__X-Firefly-III-Url = http://10.69.2.90:30105
 ReverseProxy__Clusters__firefly-mcp__Destinations__primary__Address = http://10.69.2.90:30110
 ```
@@ -235,6 +235,33 @@ The gateway listens on node port 30111 and proxies to the bare MCP server on
 30110. Traefik's `firefly-mcp` service is repointed from 30110 to 30111, so the
 unauthenticated server is no longer reachable from outside the LAN.
 
-The app will not start if `Upstream__Headers__Authorization` is empty — that is
-deliberate, so a missing token fails loudly instead of producing 401s from the
-upstream that look like a gateway fault.
+### Secrets that are too long for an environment variable
+
+TrueNAS rejects environment values longer than 1024 characters, and a Firefly III
+personal access token is a JWT well past that. Any configuration key can therefore
+be read from a file instead: append `__FILE` to the key and give it a path.
+
+Add a host-path storage mount to the app:
+
+| | |
+|---|---|
+| Host path | `/mnt/main/apps/firefly-mcp-gateway/secrets` |
+| Mount path | `/secrets` |
+| Read only | yes |
+
+Put the token in `/mnt/main/apps/firefly-mcp-gateway/secrets/firefly-pat` as a
+single line, including the `Bearer ` prefix:
+
+```
+Bearer eyJ0eXAiOiJKV1Qi...
+```
+
+Trailing whitespace is trimmed, so an editor's newline does not corrupt the header.
+Tighten the permissions — `chmod 600` — since this token is full access to Firefly III.
+
+The same trick works for any key, and it is the better place for a secret in general:
+file permissions apply, and the value does not appear in `docker inspect`.
+
+The app will not start if the resulting `Upstream__Headers__Authorization` is empty
+or the file is missing — that is deliberate, so a bad token fails loudly at startup
+instead of producing 401s from the upstream that look like a gateway fault.
