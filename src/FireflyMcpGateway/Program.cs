@@ -334,23 +334,19 @@ internal sealed class UpstreamOptions
 
     public void Validate()
     {
-        if (Headers.Count == 0)
+        // A header declared with an empty value is a placeholder: appsettings.json ships
+        // the shape, the environment supplies the value. Drop the ones nobody filled in
+        // rather than refusing to start — an upstream that holds its own credentials
+        // legitimately needs no header from this gateway at all, and a crash loop is a
+        // far worse failure than a header that simply is not sent.
+        foreach (var key in Headers
+                     .Where(header => string.IsNullOrWhiteSpace(header.Value))
+                     .Select(header => header.Key)
+                     .ToList())
         {
-            throw new InvalidOperationException(
-                "Upstream:Headers is empty. Declare at least the upstream's credential, " +
-                "e.g. Upstream__Headers__Authorization=\"Bearer <token>\".");
-        }
-
-        foreach (var header in Headers)
-        {
-            if (string.IsNullOrWhiteSpace(header.Value))
-            {
-                throw new InvalidOperationException(
-                    $"Upstream:Headers:{header.Key} has no value. Set it in the environment, " +
-                    "not in appsettings.json.");
-            }
+            Headers.Remove(key);
         }
     }
 
-    public string Describe() => string.Join(", ", Headers.Keys);
+    public string Describe() => Headers.Count == 0 ? "none" : string.Join(", ", Headers.Keys);
 }
