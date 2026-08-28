@@ -38,10 +38,32 @@ auth=(-H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json")
 
 # Fail early with a clear message rather than a confusing 404 later.
 if ! curl -sfS "${auth[@]}" "$api" >/dev/null 2>&1; then
-  echo "realm '$KC_REALM' not found at $KC_URL" >&2
-  echo "realms this admin can see:" >&2
-  curl -sfS "${auth[@]}" "$KC_URL/admin/realms" 2>/dev/null | jq -r '.[].realm' | sed 's/^/  - /' >&2
-  exit 1
+  if [ "${CREATE_REALM:-0}" = "1" ]; then
+    echo "==> Realm '$KC_REALM' does not exist; creating it"
+    # This realm's login page becomes publicly reachable, so brute-force
+    # protection is on from the start rather than bolted on later.
+    curl -sfS -X POST "${auth[@]}" "$KC_URL/admin/realms" -d @- <<JSON >/dev/null
+{
+  "realm": "$KC_REALM",
+  "enabled": true,
+  "displayName": "$KC_REALM",
+  "sslRequired": "external",
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "failureFactor": 10,
+  "waitIncrementSeconds": 60,
+  "maxFailureWaitSeconds": 900
+}
+JSON
+    echo "    created"
+  else
+    echo "realm '$KC_REALM' not found at $KC_URL" >&2
+    echo "realms this admin can see:" >&2
+    curl -sfS "${auth[@]}" "$KC_URL/admin/realms" 2>/dev/null | jq -r '.[].realm' | sed 's/^/  - /' >&2
+    echo "" >&2
+    echo "re-run with CREATE_REALM=1 to create it" >&2
+    exit 1
+  fi
 fi
 
 # --- client scope -------------------------------------------------------------
