@@ -1,0 +1,87 @@
+# Traefik dynamic configuration for the Firefly MCP gateway and Keycloak.
+#
+# Drop into your file provider directory and Traefik hot-reloads it.
+# Nothing here touches existing routers; both hosts are new.
+#
+# Adjust: the LAN range, your entrypoint name, and your certresolver name.
+
+http:
+  middlewares:
+
+    # Anthropic's published egress range. Traffic to the MCP endpoint comes
+    # only from here — this is what replaces the LAN ip-whitelist.
+    anthropic-only:
+      ipAllowList:
+        sourceRange:
+          - "160.79.104.0/21"
+
+    # The MCP endpoint from Claude Code runs on your own machine, so its
+    # requests come from your IP, not Anthropic's. Use this variant if you
+    # want Claude Code to reach it too.
+    anthropic-and-lan:
+      ipAllowList:
+        sourceRange:
+          - "160.79.104.0/21"
+          - "10.69.0.0/16"
+
+    lan-only:
+      ipAllowList:
+        sourceRange:
+          - "10.69.0.0/16"
+
+  routers:
+
+    # --- Firefly MCP gateway -------------------------------------------------
+    firefly-mcp:
+      rule: "Host(`firefly-mcp.peters-elshoff.nl`)"
+      entryPoints: [websecure]
+      service: firefly-mcp-gateway
+      middlewares:
+        - anthropic-only@file
+        - secure-headers@file
+      tls:
+        certResolver: letsencrypt
+
+    # --- Keycloak ------------------------------------------------------------
+    # The admin console must never be public. Higher priority wins in Traefik,
+    # so this rule is evaluated before the catch-all below.
+    keycloak-admin:
+      rule: "Host(`keycloak.peters-elshoff.nl`) && (PathPrefix(`/admin`) || PathPrefix(`/metrics`) || PathPrefix(`/health`))"
+      priority: 100
+      entryPoints: [websecure]
+      service: keycloak
+      middlewares:
+        - lan-only@file
+        - secure-headers@file
+      tls:
+        certResolver: letsencrypt
+
+    # Everything else on this host is the OIDC surface: discovery, authorize,
+    # token, certs. Claude hits discovery and token from its egress range; you
+    # hit the authorize endpoint from a browser that could be anywhere, including
+    # mobile data. That is why this one is not IP-restricted.
+    #
+    # Turn on brute-force detection for the realm before exposing this:
+    #   Realm settings -> Security defenses -> Brute force detection
+    keycloak-public:
+      rule: "Host(`keycloak.peters-elshoff.nl`)"
+      priority: 1
+      entryPoints: [websecure]
+      service: keycloak
+      middlewares:
+        - secure-headers@file
+      tls:
+        certResolver: letsencrypt
+
+  services:
+
+    firefly-mcp-gateway:
+      loadBalancer:
+        servers:
+          # The gateway container. Change if you run it elsewhere.
+          - url: "http://10.69.2.90:8080"
+
+    keycloak:
+      loadBalancer:
+        servers:
+          - url: "http://10.69.2.90:30080"
