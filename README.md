@@ -87,6 +87,47 @@ curl -s https://keycloak.peters-elshoff.nl/realms/home/.well-known/openid-config
 must contain `S256`. If `scopes_supported` lists `offline_access`, Claude will
 request it and you get refresh tokens for free.
 
+## Reaching the issuer from inside the container
+
+The gateway validates tokens against the public issuer, but it has to *fetch* the
+signing keys, and inside a container that is where things go wrong. The container's
+resolver is usually the router rather than whatever does split-horizon DNS on the
+LAN, so the public hostname resolves to the public IP — and the request then has to
+hairpin back in through the router, which many routers refuse. The symptom is not an
+error but a hang: requests arrive, never reach the proxy, and the client eventually
+gives up.
+
+Set `Mcp__IssuerAddressOverride` to the reverse proxy's internal address:
+
+```
+Mcp__IssuerAddressOverride = 10.69.2.90
+```
+
+Only the TCP target changes. TLS, SNI and the `Host` header still use the real
+hostname, so the certificate validates normally and nothing is weakened.
+
+`Mcp__MetadataAddress` exists for the same problem but only covers the discovery
+request; the document it returns carries an absolute `jwks_uri` pointing back at the
+public host, so the key fetch hairpins anyway. Prefer the address override — it
+covers discovery, JWKS and anything added later in one place.
+
+## Where the upstream credential belongs
+
+Put the upstream's own credential in the upstream, not in the gateway.
+
+`firefly-iii-mcp` takes `FIREFLY_III_PAT` and `FIREFLY_III_BASE_URL` as environment
+variables and prefers them over the per-request headers. Injecting a token from the
+gateway as well gives you two places that must agree, and the failure mode is
+misleading: `tools/list` keeps working — it never calls Firefly III — while every
+actual tool call returns `401 Unauthenticated` from Firefly.
+
+So keep `Upstream:Headers` for what it is good at — a header the upstream cannot
+supply itself — and let the MCP server hold its own credentials. The gateway's job
+is authenticating callers against the identity provider, and nothing more.
+
+Note that `<KEY>__FILE` values are read once at startup. Rotating a secret means
+restarting the container; changing the file alone does nothing.
+
 ## Network
 
 Anthropic's outbound traffic comes from **`160.79.104.0/21`**. That range must
