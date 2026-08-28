@@ -70,10 +70,23 @@ builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // Discovery: {Issuer}/.well-known/openid-configuration
+        // Discovery defaults to {Issuer}/.well-known/openid-configuration.
         options.Authority = mcp.Issuer;
-        options.RequireHttpsMetadata = true;
         options.MapInboundClaims = false;
+
+        // Inside a container the public issuer hostname often resolves to the public
+        // IP, so discovery leaves the network and has to hairpin back through the
+        // router — which many routers refuse, leaving the first request to hang until
+        // the client gives up. MetadataAddress sends discovery straight to an internal
+        // address; the token's `iss` is still validated against the public Issuer, so
+        // nothing is weakened.
+        if (!string.IsNullOrWhiteSpace(mcp.MetadataAddress))
+        {
+            options.MetadataAddress = mcp.MetadataAddress;
+        }
+
+        options.RequireHttpsMetadata = (mcp.MetadataAddress ?? mcp.Issuer)
+            .StartsWith("https://", StringComparison.OrdinalIgnoreCase);
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -188,6 +201,13 @@ internal sealed class McpOptions
 
     /// <summary>Absolute URL of this gateway's protected resource metadata document.</summary>
     public string ResourceMetadataUrl { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Optional. Full URL of the OIDC discovery document, for when it must be fetched
+    /// somewhere other than {Issuer}/.well-known/openid-configuration — an address on
+    /// the internal network, typically. Issuer validation still uses Issuer.
+    /// </summary>
+    public string? MetadataAddress { get; set; }
 
     public string[] ScopesSupported { get; set; } = [];
 
