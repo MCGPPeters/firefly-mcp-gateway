@@ -10,9 +10,9 @@ var mcp = builder.Configuration.GetSection("Mcp").Get<McpOptions>()
           ?? throw new InvalidOperationException("Configuration section 'Mcp' is missing.");
 mcp.Validate();
 
-var firefly = builder.Configuration.GetSection("Firefly").Get<FireflyOptions>()
-              ?? throw new InvalidOperationException("Configuration section 'Firefly' is missing.");
-firefly.Validate();
+var upstream = builder.Configuration.GetSection("Upstream").Get<UpstreamOptions>()
+               ?? throw new InvalidOperationException("Configuration section 'Upstream' is missing.");
+upstream.Validate();
 
 // Traefik terminates TLS and is the only hop in front of this gateway.
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
@@ -91,19 +91,25 @@ builder.Services.AddReverseProxy()
             var request = transform.ProxyRequest;
 
             // The Keycloak token authorises the caller against this gateway and must
-            // never reach the upstream. firefly-iii-mcp speaks Firefly III PAT.
+            // never reach the upstream, whatever credential that upstream expects
+            // instead. Stripping it unconditionally also stops a caller smuggling
+            // one through when no Authorization header is configured.
             request.Headers.Remove("Authorization");
-            request.Headers.TryAddWithoutValidation(
-                "Authorization", $"Bearer {firefly.PersonalAccessToken}");
 
-            request.Headers.Remove("X-Firefly-III-Url");
-            request.Headers.TryAddWithoutValidation("X-Firefly-III-Url", firefly.BaseUrl);
+            foreach (var header in upstream.Headers)
+            {
+                request.Headers.Remove(header.Key);
+                request.Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
 
             return ValueTask.CompletedTask;
         });
     });
 
 var app = builder.Build();
+
+// Names only. The values are credentials.
+app.Logger.LogInformation("Injecting upstream headers: {Headers}", upstream.Describe());
 
 app.UseForwardedHeaders();
 app.UseAuthentication();
@@ -208,25 +214,35 @@ internal sealed class McpOptions
     }
 }
 
-internal sealed class FireflyOptions
+internal sealed class UpstreamOptions
 {
-    /// <summary>Base URL of Firefly III as reachable from the MCP container.</summary>
-    public string BaseUrl { get; set; } = string.Empty;
-
-    /// <summary>Firefly III personal access token (Options &gt; Profile &gt; OAuth).</summary>
-    public string PersonalAccessToken { get; set; } = string.Empty;
+    /// <summary>
+    /// Headers sent to the upstream MCP server, replacing whatever the caller sent.
+    /// This is where the upstream's own credential belongs: a Firefly III personal
+    /// access token, a Home Assistant long-lived access token, and so on. Keeping it
+    /// a plain dictionary is what lets one image front more than one MCP server.
+    /// </summary>
+    public Dictionary<string, string> Headers { get; set; } = [];
 
     public void Validate()
     {
-        if (string.IsNullOrWhiteSpace(BaseUrl))
-        {
-            throw new InvalidOperationException("Firefly:BaseUrl is required.");
-        }
-
-        if (string.IsNullOrWhiteSpace(PersonalAccessToken))
+        if (Headers.Count == 0)
         {
             throw new InvalidOperationException(
-                "Firefly:PersonalAccessToken is required. Set Firefly__PersonalAccessToken in the environment.");
+                "Upstream:Headers is empty. Declare at least the upstream's credential, " +
+                "e.g. Upstream__Headers__Authorization=\"Bearer <token>\".");
+        }
+
+        foreach (var header in Headers)
+        {
+            if (string.IsNullOrWhiteSpace(header.Value))
+            {
+                throw new InvalidOperationException(
+                    $"Upstream:Headers:{header.Key} has no value. Set it in the environment, " +
+                    "not in appsettings.json.");
+            }
         }
     }
+
+    public string Describe() => string.Join(", ", Headers.Keys);
 }

@@ -114,8 +114,7 @@ Every key is settable as an environment variable with `__` as the separator.
 | `Mcp__ResourceMetadataUrl` | Absolute URL of the metadata document this gateway serves. |
 | `Mcp__ScopesSupported__N` | Scopes advertised in metadata and in the 401 challenge. |
 | `Mcp__RequiredScope` | Optional. When set, a token without this scope gets a 403. Leave empty at first. |
-| `Firefly__BaseUrl` | Firefly III URL as reachable from the MCP container. |
-| `Firefly__PersonalAccessToken` | Firefly III PAT (Options → Profile → OAuth). Secret — pass by environment, never commit. |
+| `Upstream__Headers__<Name>` | Headers sent to the upstream MCP server, replacing whatever the caller sent. This is where the upstream's own credential goes. Secrets belong in the environment, never in `appsettings.json`. |
 | `ReverseProxy__Clusters__firefly-mcp__Destinations__primary__Address` | Upstream `firefly-iii-mcp` address. |
 
 ## Deploy
@@ -157,3 +156,50 @@ Settings → Connectors → **Add custom connector**
   in via a Keycloak realm role or group policy on the client if that matters.
 * `firefly-iii-mcp` is pinned by tag in `compose.yaml`. Pin a digest instead if
   you want the upstream frozen — it is third-party code holding your finances.
+
+## A second instance: Home Assistant
+
+The gateway is upstream-agnostic — only `Upstream:Headers` differs per instance —
+so the same image can front Home Assistant's MCP server.
+
+**Why this is needed at all.** Home Assistant implements the MCP OAuth handshake
+itself: `POST /api/mcp` returns a proper `401` with a `resource_metadata` pointer,
+and it serves both well-known documents. On paper it needs no gateway. In practice
+its authorization server metadata is missing three fields Claude depends on:
+
+| Field | State | Consequence |
+|---|---|---|
+| `token_endpoint_auth_methods_supported` | absent | Claude needs `"none"` here *alongside* `client_id_metadata_document_supported` to pick CIMD. Missing, so it falls back to DCR. |
+| `registration_endpoint` | absent | IndieAuth does not do dynamic client registration, so the DCR fallback dead-ends. |
+| `code_challenge_methods_supported` | absent | The spec requires `["S256"]` to be advertised so clients can verify PKCE support up front. |
+
+Its protected resource metadata also declares `"resource": "https://<host>"` with no
+path, while the endpoint is `/api/mcp` — Claude requires `resource` to match the URL
+the user types, character for character.
+
+Re-check this before building around it; a Home Assistant release that adds those
+fields makes the gateway unnecessary for HA, and connecting directly is better
+because it keeps HA's own per-user authorization.
+
+**Running it.** Give the second instance its own hostname, its own Keycloak client
+scope with its own audience mapper, and its own container. Do **not** add both
+audiences to one instance: without RFC 8707 resource indicators, a token minted for
+one upstream would be accepted on the other.
+
+```yaml
+environment:
+  Mcp__Resource: https://ha-mcp.peters-elshoff.nl/mcp
+  Mcp__ResourceMetadataUrl: https://ha-mcp.peters-elshoff.nl/.well-known/oauth-protected-resource
+  Mcp__Issuer: https://keycloak.peters-elshoff.nl/realms/home
+  Upstream__Headers__Authorization: "Bearer ${HA_LONG_LIVED_TOKEN}"
+  ReverseProxy__Clusters__firefly-mcp__Destinations__primary__Address: http://homeassistant:8123/
+```
+
+Route `/mcp` to Home Assistant's `/api/mcp` with a YARP path transform, or point the
+cluster at the full path.
+
+**The trade-off.** A Home Assistant long-lived access token carries one user's full
+rights. Everyone who completes the Keycloak flow gets those rights, and HA's own
+per-user authorization is bypassed. That is acceptable for Firefly III, where a PAT is
+the only option. For Home Assistant it is a real loss — which is why the direct route
+is worth re-testing whenever HA is updated.

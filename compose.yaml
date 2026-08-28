@@ -30,8 +30,8 @@ services:
       Mcp__ScopesSupported__1: profile
       Mcp__ScopesSupported__2: firefly-mcp
       Mcp__RequiredScope: ""
-      Firefly__BaseUrl: ${FIREFLY_BASE_URL}
-      Firefly__PersonalAccessToken: ${FIREFLY_PAT}
+      Upstream__Headers__Authorization: "Bearer ${FIREFLY_PAT}"
+      Upstream__Headers__X-Firefly-III-Url: ${FIREFLY_BASE_URL}
       ReverseProxy__Clusters__firefly-mcp__Destinations__primary__Address: http://firefly-mcp:3000/
     networks: [internal, proxy]
     labels:
