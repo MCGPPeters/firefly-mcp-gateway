@@ -1,3 +1,4 @@
+using System.Net.Sockets;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -87,6 +88,42 @@ builder.Services
 
         options.RequireHttpsMetadata = (mcp.MetadataAddress ?? mcp.Issuer)
             .StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+
+        // MetadataAddress only moves the discovery request. The document it returns
+        // carries an absolute jwks_uri pointing back at the public issuer, so the key
+        // fetch still leaves the network and hairpins through the router. Redirecting
+        // the whole backchannel at the connection layer covers discovery, JWKS and any
+        // later endpoint in one go — and because only the TCP target changes, TLS, SNI
+        // and the Host header still use the real hostname, so the certificate matches.
+        if (!string.IsNullOrWhiteSpace(mcp.IssuerAddressOverride))
+        {
+            var issuerHost = new Uri(mcp.Issuer).Host;
+            var overrideAddress = mcp.IssuerAddressOverride;
+
+            options.BackchannelHttpHandler = new SocketsHttpHandler
+            {
+                ConnectCallback = async (context, cancellationToken) =>
+                {
+                    var host = string.Equals(
+                        context.DnsEndPoint.Host, issuerHost, StringComparison.OrdinalIgnoreCase)
+                        ? overrideAddress
+                        : context.DnsEndPoint.Host;
+
+                    var socket = new Socket(SocketType.Stream, ProtocolType.Tcp) { NoDelay = true };
+
+                    try
+                    {
+                        await socket.ConnectAsync(host, context.DnsEndPoint.Port, cancellationToken);
+                        return new NetworkStream(socket, ownsSocket: true);
+                    }
+                    catch
+                    {
+                        socket.Dispose();
+                        throw;
+                    }
+                }
+            };
+        }
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -208,6 +245,14 @@ internal sealed class McpOptions
     /// the internal network, typically. Issuer validation still uses Issuer.
     /// </summary>
     public string? MetadataAddress { get; set; }
+
+    /// <summary>
+    /// Optional. Address to connect to instead of resolving the issuer's hostname —
+    /// the reverse proxy's internal IP, typically. TLS, SNI and the Host header still
+    /// use the hostname, so certificate validation is unaffected. Setting this makes
+    /// <see cref="MetadataAddress"/> unnecessary.
+    /// </summary>
+    public string? IssuerAddressOverride { get; set; }
 
     public string[] ScopesSupported { get; set; } = [];
 
