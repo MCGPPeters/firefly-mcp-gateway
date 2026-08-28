@@ -203,3 +203,38 @@ rights. Everyone who completes the Keycloak flow gets those rights, and HA's own
 per-user authorization is bypassed. That is acceptable for Firefly III, where a PAT is
 the only option. For Home Assistant it is a real loss — which is why the direct route
 is worth re-testing whenever HA is updated.
+
+## Running it as a TrueNAS Custom App
+
+The image is published to `ghcr.io/<owner>/firefly-mcp-gateway:latest` by
+`.github/workflows/publish.yml`. Apps → Discover Apps → Custom App.
+
+| Field | Value |
+|---|---|
+| Image repository | `ghcr.io/<owner>/firefly-mcp-gateway` |
+| Image tag | `latest` |
+| Port: container | `8080` |
+| Port: node | `30111` |
+
+Environment variables — every real value lives here, never in the image:
+
+```
+ASPNETCORE_HTTP_PORTS = 8080
+Mcp__Resource = https://firefly-mcp.peters-elshoff.nl/mcp
+Mcp__ResourceMetadataUrl = https://firefly-mcp.peters-elshoff.nl/.well-known/oauth-protected-resource
+Mcp__Issuer = https://keycloak.peters-elshoff.nl/realms/home
+Mcp__ScopesSupported__0 = openid
+Mcp__ScopesSupported__1 = profile
+Mcp__ScopesSupported__2 = firefly-mcp
+Upstream__Headers__Authorization = Bearer <Firefly III PAT>
+Upstream__Headers__X-Firefly-III-Url = http://10.69.2.90:30105
+ReverseProxy__Clusters__firefly-mcp__Destinations__primary__Address = http://10.69.2.90:30110
+```
+
+The gateway listens on node port 30111 and proxies to the bare MCP server on
+30110. Traefik's `firefly-mcp` service is repointed from 30110 to 30111, so the
+unauthenticated server is no longer reachable from outside the LAN.
+
+The app will not start if `Upstream__Headers__Authorization` is empty — that is
+deliberate, so a missing token fails loudly instead of producing 401s from the
+upstream that look like a gateway fault.
