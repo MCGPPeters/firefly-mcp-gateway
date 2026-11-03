@@ -1,5 +1,6 @@
 using System.Net.Sockets;
 using System.Text;
+using FireflyMcpGateway.Slimming;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
@@ -175,10 +176,16 @@ builder.Services.AddAuthorizationBuilder()
         }
     });
 
+// Tool results are slimmed on the way back; see ResultSlimmer and docs/adr/0001.
+var slimming = builder.Configuration.GetSection("Slimming").Get<SlimmingOptions>() ?? new SlimmingOptions();
+builder.Services.AddSingleton(new ResultSlimmer(slimming));
+
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
     .AddTransforms(context =>
     {
+        var slimmer = context.Services.GetRequiredService<ResultSlimmer>();
+
         context.AddRequestTransform(transform =>
         {
             var request = transform.ProxyRequest;
@@ -189,6 +196,13 @@ builder.Services.AddReverseProxy()
             // one through when no Authorization header is configured.
             request.Headers.Remove("Authorization");
 
+            // Slimming reads the upstream's response, which it cannot do through
+            // compression. Inside the compose network compression buys nothing anyway.
+            if (slimmer.Enabled)
+            {
+                request.Headers.Remove("Accept-Encoding");
+            }
+
             foreach (var header in upstream.Headers)
             {
                 request.Headers.Remove(header.Key);
@@ -197,12 +211,15 @@ builder.Services.AddReverseProxy()
 
             return ValueTask.CompletedTask;
         });
+
+        context.AddResponseTransform(transform => SlimmingTransform.ApplyAsync(transform, slimmer));
     });
 
 var app = builder.Build();
 
 // Names only. The values are credentials.
 app.Logger.LogInformation("Injecting upstream headers: {Headers}", upstream.Describe());
+app.Logger.LogInformation("Result slimming: {Slimming}", app.Services.GetRequiredService<ResultSlimmer>().Describe());
 
 app.UseForwardedHeaders();
 app.UseAuthentication();
@@ -349,4 +366,9 @@ internal sealed class UpstreamOptions
     }
 
     public string Describe() => Headers.Count == 0 ? "none" : string.Join(", ", Headers.Keys);
+}
+
+// Lets the integration tests host the gateway with WebApplicationFactory<Program>.
+public partial class Program
+{
 }

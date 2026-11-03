@@ -1,0 +1,1185 @@
+{
+  "data": [
+    {
+      "type": "bills",
+      "id": "3729",
+      "attributes": {
+        "created_at": "2026-10-10T00:00:00+02:00",
+        "updated_at": "2026-09-28T00:00:00+02:00",
+        "name": "Tango oscar kilo",
+        "object_has_currency_setting": true,
+        "currency_id": "3714",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3714",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "363.35",
+        "pc_amount_min": null,
+        "amount_max": "265.51",
+        "pc_amount_max": null,
+        "amount_avg": "52.69",
+        "pc_amount_avg": null,
+        "date": "2026-10-15T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 8,
+        "notes": "Kilo zulu golf uniform zulu kilo golf oscar hotel yankee charlie charlie india kilo echo victor yankee india alpha kilo zulu november charlie romeo november echo mike bravo whiskey romeo charlie bravo tango romeo kilo bravo sierra mike echo victor victor charlie sierra india juliett foxtrot oscar zulu echo romeo charlie hotel quebec oscar alpha romeo papa hotel oscar whiskey victor sierra charlie juliett oscar",
+        "object_group_id": "3728",
+        "object_group_order": 1,
+        "object_group_title": "Charlie oscar zulu u",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-10-18T00:00:00+02:00",
+          "2026-08-07T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-07-03T00:00:00+02:00",
+        "next_expected_match_diff": "Whiskey quebec juliett india i"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "India un"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/785"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3762",
+      "attributes": {
+        "created_at": "2026-10-18T00:00:00+02:00",
+        "updated_at": "2026-09-20T00:00:00+02:00",
+        "name": "Lima juliett p",
+        "object_has_currency_setting": true,
+        "currency_id": "3745",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3745",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "180.18",
+        "pc_amount_min": null,
+        "amount_max": "400.37",
+        "pc_amount_max": null,
+        "amount_avg": "457.88",
+        "pc_amount_avg": null,
+        "date": "2026-08-02T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 15,
+        "notes": "Lima foxtrot xray romeo uniform sierra mike november mike echo hotel golf sierra uniform hotel india quebec bravo quebec zulu mike papa oscar echo oscar romeo papa foxtrot papa golf foxtrot charlie xray india kilo echo charlie lima india foxtrot bravo sierra oscar golf oscar juliett india foxtrot quebec tango bravo mike november delta sierra juliett golf foxtrot mike whiskey charlie lima whiskey zulu mike juliett",
+        "object_group_id": "3761",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-10-22T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-08-07T00:00:00+02:00",
+        "next_expected_match_diff": "Romeo victor oscar kilo qu"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Golf kilo"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/550"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3773",
+      "attributes": {
+        "created_at": "2026-10-08T00:00:00+02:00",
+        "updated_at": "2026-10-06T00:00:00+02:00",
+        "name": "India hote",
+        "object_has_currency_setting": true,
+        "currency_id": "3765",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3765",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "429.64",
+        "pc_amount_min": null,
+        "amount_max": "402.15",
+        "pc_amount_max": null,
+        "amount_avg": "342.17",
+        "pc_amount_avg": null,
+        "date": "2026-08-27T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 19,
+        "notes": "Oscar charlie lima india bravo tango golf xray foxtrot india november oscar quebec golf uniform xray victor mike kilo juliett hotel november papa echo alpha juliett foxtrot kilo romeo zulu alpha tango oscar golf echo yankee lima hotel quebec romeo india echo foxtrot bravo golf oscar kilo lima mike lima sierra echo golf foxtrot victor romeo sierra tango hotel victor india mike quebec kilo whiskey lima india xray alpha yankee hotel",
+        "object_group_id": null,
+        "object_group_order": null,
+        "object_group_title": "Echo alpha victor",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-07-14T00:00:00+02:00",
+          "2026-08-08T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-08-13T00:00:00+02:00",
+        "next_expected_match_diff": "Echo papa bravo juliett golf"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Tango p"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/617"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3801",
+      "attributes": {
+        "created_at": "2026-08-04T00:00:00+02:00",
+        "updated_at": "2026-07-12T00:00:00+02:00",
+        "name": "Kilo papa",
+        "object_has_currency_setting": true,
+        "currency_id": "3786",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3786",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "309.25",
+        "pc_amount_min": null,
+        "amount_max": "281.94",
+        "pc_amount_max": null,
+        "amount_avg": "391.35",
+        "pc_amount_avg": null,
+        "date": "2026-10-05T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 17,
+        "notes": "Xray xray india foxtrot india delta lima charlie kilo quebec november papa hotel yankee delta november sierra xray romeo whiskey oscar bravo quebec bravo golf quebec papa romeo victor india juliett quebec victor xray yankee charlie yankee mike juliett whiskey golf juliett quebec delta zulu papa tango charlie tango tango charlie juliett mike yankee victor delta e",
+        "object_group_id": "3800",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-07-18T00:00:00+02:00",
+          "2026-08-18T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-09-07T00:00:00+02:00",
+        "next_expected_match_diff": "Juliett bravo uniform foxtrot"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Golf que"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/563"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3810",
+      "attributes": {
+        "created_at": "2026-07-06T00:00:00+02:00",
+        "updated_at": "2026-09-24T00:00:00+02:00",
+        "name": "Kilo quebec",
+        "object_has_currency_setting": true,
+        "currency_id": "3808",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3808",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "179.87",
+        "pc_amount_min": null,
+        "amount_max": "321.07",
+        "pc_amount_max": null,
+        "amount_avg": "148.24",
+        "pc_amount_avg": null,
+        "date": "2026-10-16T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 3,
+        "notes": "Yankee sierra sierra oscar november echo tango papa foxtrot charlie india echo india papa lima hotel mike juliett tango juliett golf papa foxtrot zulu romeo foxtrot charlie quebec sierra bravo yankee tango sierra alpha sierra oscar alpha foxtrot kilo xray romeo tango foxtrot alpha zulu foxtrot foxtrot juliett whiskey victor india lima alpha uniform india romeo juliett hotel quebec oscar papa lima kilo",
+        "object_group_id": null,
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-09-19T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-09-09T00:00:00+02:00",
+        "next_expected_match_diff": "November india uniform unifor"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "November o"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/696"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3830",
+      "attributes": {
+        "created_at": "2026-09-19T00:00:00+02:00",
+        "updated_at": "2026-08-17T00:00:00+02:00",
+        "name": "Mike bravo un",
+        "object_has_currency_setting": true,
+        "currency_id": "3815",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3815",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "153.14",
+        "pc_amount_min": null,
+        "amount_max": "41.74",
+        "pc_amount_max": null,
+        "amount_avg": "8.72",
+        "pc_amount_avg": null,
+        "date": "2026-10-11T00:00:00+02:00",
+        "end_date": "2026-10-21T00:00:00+02:00",
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 4,
+        "notes": "Echo whiskey bravo victor whiskey november xray romeo yankee sierra hotel victor tango zulu uniform november hotel juliett lima foxtrot alpha juliett quebec victor india romeo india juliett hotel echo romeo golf romeo uniform romeo sierra foxtrot uniform golf kilo victor alpha foxtrot hotel ech",
+        "object_group_id": "3829",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-07-26T00:00:00+02:00",
+          "2026-07-02T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-10-03T00:00:00+02:00",
+        "next_expected_match_diff": "Delta golf novembe"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Uniform vi"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/354"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3857",
+      "attributes": {
+        "created_at": "2026-08-19T00:00:00+02:00",
+        "updated_at": "2026-10-10T00:00:00+02:00",
+        "name": "Bravo kilo vict",
+        "object_has_currency_setting": true,
+        "currency_id": "3846",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3846",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "135.66",
+        "pc_amount_min": null,
+        "amount_max": "121.43",
+        "pc_amount_max": null,
+        "amount_avg": "12.08",
+        "pc_amount_avg": null,
+        "date": "2026-08-07T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 10,
+        "notes": "Victor kilo hotel yankee papa kilo sierra tango papa india oscar alpha echo quebec foxtrot xray charlie whiskey tango whiskey zulu foxtrot echo xray alpha papa tango bravo golf lima romeo india india uniform echo mike xray delta golf romeo yankee xray ch",
+        "object_group_id": "3856",
+        "object_group_order": 1,
+        "object_group_title": "Romeo juliett juliet",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-02T00:00:00+02:00",
+          "2026-10-12T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-08-04T00:00:00+02:00",
+        "next_expected_match_diff": "Xray hotel november india sier"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Mike u"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/381"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3879",
+      "attributes": {
+        "created_at": "2026-08-05T00:00:00+02:00",
+        "updated_at": "2026-10-27T00:00:00+02:00",
+        "name": "November tango",
+        "object_has_currency_setting": true,
+        "currency_id": "3866",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3866",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "108.18",
+        "pc_amount_min": null,
+        "amount_max": "105.45",
+        "pc_amount_max": null,
+        "amount_avg": "6.20",
+        "pc_amount_avg": null,
+        "date": "2026-10-28T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 5,
+        "notes": "Delta yankee mike lima tango foxtrot hotel kilo mike golf uniform victor uniform papa papa echo hotel hotel papa sierra romeo yankee kilo uniform delta charlie papa mike foxtrot tango victor kilo charlie romeo romeo echo juliett yankee november foxtrot mike lima yankee kilo quebec victor mike",
+        "object_group_id": "3878",
+        "object_group_order": 1,
+        "object_group_title": "Alpha november ta",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-09-13T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-10-22T00:00:00+02:00",
+        "next_expected_match_diff": "Xray lima juliett bravo"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Juliet"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/448"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3900",
+      "attributes": {
+        "created_at": "2026-10-14T00:00:00+02:00",
+        "updated_at": "2026-07-24T00:00:00+02:00",
+        "name": "Alpha kilo",
+        "object_has_currency_setting": true,
+        "currency_id": "3893",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3893",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "176.56",
+        "pc_amount_min": null,
+        "amount_max": "303.53",
+        "pc_amount_max": null,
+        "amount_avg": "119.16",
+        "pc_amount_avg": null,
+        "date": "2026-09-07T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 6,
+        "notes": "Charlie quebec sierra november xray victor hotel lima tango alpha juliett mike india kilo echo alpha sierra november tango alpha november zulu uniform whiskey whiskey whiskey papa foxtrot hotel uniform golf echo victor zulu echo quebec oscar victor oscar xray juliett xray lima sierra victor xray lima juliett victor lima delta uniform mike mike kilo uniform yankee uniform zulu kilo foxtrot lima mike papa kilo bravo papa hotel",
+        "object_group_id": null,
+        "object_group_order": null,
+        "object_group_title": "Xray november no",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-06T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-07-06T00:00:00+02:00",
+        "next_expected_match_diff": "Zulu victor xray yank"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Alpha indi"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/508"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3921",
+      "attributes": {
+        "created_at": "2026-10-02T00:00:00+02:00",
+        "updated_at": "2026-10-07T00:00:00+02:00",
+        "name": "Charlie whiskey",
+        "object_has_currency_setting": true,
+        "currency_id": "3909",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3909",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "214.06",
+        "pc_amount_min": null,
+        "amount_max": "177.66",
+        "pc_amount_max": null,
+        "amount_avg": "112.55",
+        "pc_amount_avg": null,
+        "date": "2026-10-25T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 5,
+        "notes": "Hotel golf alpha juliett echo xray golf hotel romeo victor romeo mike oscar foxtrot tango sierra yankee echo juliett oscar golf hotel juliett xray xray romeo november juliett zulu november november foxtrot yankee whiskey zulu tango papa foxtrot sier",
+        "object_group_id": "3920",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-10-12T00:00:00+02:00",
+          "2026-07-23T00:00:00+02:00",
+          "2026-10-28T00:00:00+02:00"
+        ],
+        "next_expected_match": null,
+        "next_expected_match_diff": "Lima yankee november sierra q"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Echo w"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/286"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3950",
+      "attributes": {
+        "created_at": "2026-08-28T00:00:00+02:00",
+        "updated_at": "2026-10-25T00:00:00+02:00",
+        "name": "Quebec novem",
+        "object_has_currency_setting": true,
+        "currency_id": "3935",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3935",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "429.96",
+        "pc_amount_min": null,
+        "amount_max": "324.04",
+        "pc_amount_max": null,
+        "amount_avg": "74.08",
+        "pc_amount_avg": null,
+        "date": "2026-07-05T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "yearly",
+        "skip": 0,
+        "active": true,
+        "order": 19,
+        "notes": "Kilo kilo uniform alpha juliett delta bravo whiskey delta whiskey lima november november whiskey uniform papa juliett delta mike papa quebec oscar hotel oscar papa juliett echo bravo romeo tango echo xray echo tango echo quebec zulu tango oscar kilo victor xray sierra victor oscar zulu sierra juliett victor golf bravo juliett juliett mike yankee november",
+        "object_group_id": "3949",
+        "object_group_order": null,
+        "object_group_title": "Kilo kilo november",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-11T00:00:00+02:00",
+          "2026-10-03T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-10-15T00:00:00+02:00",
+        "next_expected_match_diff": "Golf romeo bravo quebec echo"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Quebec rome"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/846"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3970",
+      "attributes": {
+        "created_at": "2026-08-14T00:00:00+02:00",
+        "updated_at": "2026-08-17T00:00:00+02:00",
+        "name": "Delta zulu mike",
+        "object_has_currency_setting": true,
+        "currency_id": "3960",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3960",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "138.46",
+        "pc_amount_min": null,
+        "amount_max": "195.89",
+        "pc_amount_max": null,
+        "amount_avg": "107.17",
+        "pc_amount_avg": null,
+        "date": "2026-10-06T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 8,
+        "notes": "India quebec hotel delta uniform november delta alpha delta bravo india bravo papa sierra zulu kilo whiskey victor romeo charlie echo november xray oscar juliett kilo zulu papa foxtrot golf delta victor echo foxtrot delta lima india echo whiskey papa echo quebec xray uniform alpha golf lima hotel whiskey xray golf bravo victor tango victor tango juliett oscar victor victor osc",
+        "object_group_id": null,
+        "object_group_order": 1,
+        "object_group_title": "Bravo tango golf",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-09-06T00:00:00+02:00",
+          "2026-07-21T00:00:00+02:00"
+        ],
+        "next_expected_match": null,
+        "next_expected_match_diff": "Golf whiskey romeo victor"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Quebec juli"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/648"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "3989",
+      "attributes": {
+        "created_at": "2026-10-12T00:00:00+02:00",
+        "updated_at": "2026-07-04T00:00:00+02:00",
+        "name": "Tango unifo",
+        "object_has_currency_setting": true,
+        "currency_id": "3981",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "3981",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "322.51",
+        "pc_amount_min": null,
+        "amount_max": "359.81",
+        "pc_amount_max": null,
+        "amount_avg": "384.72",
+        "pc_amount_avg": null,
+        "date": "2026-10-27T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 10,
+        "notes": "Hotel quebec charlie kilo november quebec foxtrot whiskey lima oscar lima romeo echo lima mike yankee sierra sierra romeo juliett mike tango victor delta papa november oscar oscar lima foxtrot charlie foxtrot india whiskey hotel kilo foxtrot zulu foxtrot november hotel whiskey foxtrot juliett november",
+        "object_group_id": null,
+        "object_group_order": null,
+        "object_group_title": "Zulu kilo zulu",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-18T00:00:00+02:00",
+          "2026-08-20T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-09-03T00:00:00+02:00",
+        "next_expected_match_diff": "Bravo sierra alpha whis"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Xray nov"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/472"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4016",
+      "attributes": {
+        "created_at": "2026-10-24T00:00:00+02:00",
+        "updated_at": "2026-08-07T00:00:00+02:00",
+        "name": "Mike queb",
+        "object_has_currency_setting": true,
+        "currency_id": "4003",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4003",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "262.80",
+        "pc_amount_min": null,
+        "amount_max": "497.10",
+        "pc_amount_max": null,
+        "amount_avg": "396.87",
+        "pc_amount_avg": null,
+        "date": "2026-08-23T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 16,
+        "notes": "Romeo lima whiskey echo yankee echo juliett zulu hotel uniform whiskey sierra oscar mike mike delta victor golf whiskey delta whiskey tango bravo charlie hotel romeo quebec juliett tango quebec delta foxtrot yankee quebec hotel tango oscar golf yankee hotel oscar zulu delta yank",
+        "object_group_id": "4015",
+        "object_group_order": null,
+        "object_group_title": "Zulu foxtrot quebec",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-10-09T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-08-25T00:00:00+02:00",
+        "next_expected_match_diff": "Delta tango uniform bravo"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Papa tango"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/803"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4028",
+      "attributes": {
+        "created_at": "2026-07-25T00:00:00+02:00",
+        "updated_at": "2026-09-11T00:00:00+02:00",
+        "name": "Bravo hotel v",
+        "object_has_currency_setting": true,
+        "currency_id": "4018",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4018",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "480.56",
+        "pc_amount_min": null,
+        "amount_max": "171.07",
+        "pc_amount_max": null,
+        "amount_avg": "238.93",
+        "pc_amount_avg": null,
+        "date": "2026-08-17T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 4,
+        "notes": "Yankee victor hotel delta tango echo yankee juliett quebec whiskey lima mike mike romeo delta delta mike alpha zulu oscar hotel zulu quebec oscar alpha sierra yankee echo tango tango yankee charlie kilo uniform echo charlie romeo romeo lima hotel uniform",
+        "object_group_id": "4027",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-07-03T00:00:00+02:00",
+          "2026-10-27T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-08-20T00:00:00+02:00",
+        "next_expected_match_diff": "Tango golf golf ki"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Unifor"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/110"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4047",
+      "attributes": {
+        "created_at": "2026-07-07T00:00:00+02:00",
+        "updated_at": "2026-08-16T00:00:00+02:00",
+        "name": "Golf mike hote",
+        "object_has_currency_setting": true,
+        "currency_id": "4037",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4037",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "472.59",
+        "pc_amount_min": null,
+        "amount_max": "293.50",
+        "pc_amount_max": null,
+        "amount_avg": "116.15",
+        "pc_amount_avg": null,
+        "date": "2026-10-15T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 3,
+        "notes": "Victor mike romeo delta oscar echo romeo sierra lima november tango charlie charlie charlie hotel quebec bravo whiskey bravo victor quebec xray tango hotel xray victor xray november golf yankee quebec zulu juliett foxtrot bravo golf charlie romeo juliett delta hotel charlie golf bravo romeo victor papa whiskey charlie yankee lima xray quebec charlie bravo oscar alpha golf delta zulu alpha yankee zulu sierra whiskey golf lima g",
+        "object_group_id": null,
+        "object_group_order": null,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-07-10T00:00:00+02:00",
+          "2026-07-21T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-09-02T00:00:00+02:00",
+        "next_expected_match_diff": "Sierra juliett juli"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Oscar victo"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/978"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4068",
+      "attributes": {
+        "created_at": "2026-09-20T00:00:00+02:00",
+        "updated_at": "2026-10-18T00:00:00+02:00",
+        "name": "Juliett lima",
+        "object_has_currency_setting": true,
+        "currency_id": "4064",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4064",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "103.84",
+        "pc_amount_min": null,
+        "amount_max": "369.22",
+        "pc_amount_max": null,
+        "amount_avg": "124.35",
+        "pc_amount_avg": null,
+        "date": "2026-09-02T00:00:00+02:00",
+        "end_date": "2026-08-14T00:00:00+02:00",
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 10,
+        "notes": "Romeo xray uniform uniform foxtrot papa foxtrot golf hotel charlie victor golf charlie zulu yankee hotel mike zulu echo romeo sierra delta tango lima foxtrot tango alpha victor yankee golf echo juliett alpha xray romeo whiskey whiskey echo romeo india xray quebec xray zulu uniform alpha kilo quebec juliett mike uniform tango zulu sierra quebec victor zulu echo alpha golf a",
+        "object_group_id": null,
+        "object_group_order": null,
+        "object_group_title": "Zulu yankee sierra zul",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-23T00:00:00+02:00",
+          "2026-09-06T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-08-19T00:00:00+02:00",
+        "next_expected_match_diff": "Romeo foxtrot delta j"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Zulu sier"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/28"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4080",
+      "attributes": {
+        "created_at": "2026-07-16T00:00:00+02:00",
+        "updated_at": "2026-09-24T00:00:00+02:00",
+        "name": "Foxtrot alp",
+        "object_has_currency_setting": true,
+        "currency_id": "4075",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4075",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "11.44",
+        "pc_amount_min": null,
+        "amount_max": "213.55",
+        "pc_amount_max": null,
+        "amount_avg": "452.66",
+        "pc_amount_avg": null,
+        "date": "2026-07-27T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 12,
+        "notes": "Golf india golf whiskey foxtrot whiskey victor hotel hotel echo quebec papa lima whiskey whiskey xray yankee echo foxtrot echo lima november kilo zulu juliett november alpha romeo juliett india mike victor sierra india xray mike juliett xray foxtrot hotel uniform romeo yankee charlie oscar golf whiskey whis",
+        "object_group_id": null,
+        "object_group_order": null,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-04T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-10-11T00:00:00+02:00",
+        "next_expected_match_diff": "Zulu yankee juliett u"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "India golf"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/682"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4100",
+      "attributes": {
+        "created_at": "2026-07-19T00:00:00+02:00",
+        "updated_at": "2026-08-09T00:00:00+02:00",
+        "name": "Delta alpha sier",
+        "object_has_currency_setting": true,
+        "currency_id": "4089",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4089",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "201.56",
+        "pc_amount_min": null,
+        "amount_max": "42.57",
+        "pc_amount_max": null,
+        "amount_avg": "280.89",
+        "pc_amount_avg": null,
+        "date": "2026-09-10T00:00:00+02:00",
+        "end_date": "2026-07-21T00:00:00+02:00",
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 10,
+        "notes": "Sierra victor whiskey mike tango golf yankee romeo echo mike quebec november kilo uniform foxtrot juliett romeo bravo oscar romeo sierra quebec romeo papa hotel lima zulu papa india india uniform romeo alpha papa delta victor foxtrot victor india golf whiskey lima lima delta kilo oscar zulu victor papa yankee kilo lima india whiskey charlie victor golf zul",
+        "object_group_id": "4099",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-07-21T00:00:00+02:00",
+          "2026-09-02T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-10-28T00:00:00+02:00",
+        "next_expected_match_diff": "Uniform mike india lima nov"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Sierra x"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/241"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4126",
+      "attributes": {
+        "created_at": "2026-09-04T00:00:00+02:00",
+        "updated_at": "2026-08-08T00:00:00+02:00",
+        "name": "Uniform s",
+        "object_has_currency_setting": true,
+        "currency_id": "4112",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4112",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "488.78",
+        "pc_amount_min": null,
+        "amount_max": "64.93",
+        "pc_amount_max": null,
+        "amount_avg": "176.91",
+        "pc_amount_avg": null,
+        "date": "2026-10-01T00:00:00+02:00",
+        "end_date": "2026-10-04T00:00:00+02:00",
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 3,
+        "notes": "Kilo sierra tango golf november hotel kilo echo mike uniform hotel november alpha hotel victor victor victor lima kilo hotel juliett echo november whiskey hotel uniform xray xray oscar lima papa juliett bravo quebec victor alpha uniform zulu delta bravo uniform bravo victor kilo ya",
+        "object_group_id": "4125",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-09-01T00:00:00+02:00",
+          "2026-07-17T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-09-14T00:00:00+02:00",
+        "next_expected_match_diff": "Xray papa lima sierra alpha ch"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Lima whiske"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/998"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4147",
+      "attributes": {
+        "created_at": "2026-10-02T00:00:00+02:00",
+        "updated_at": "2026-07-18T00:00:00+02:00",
+        "name": "Sierra echo char",
+        "object_has_currency_setting": true,
+        "currency_id": "4138",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4138",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "103.13",
+        "pc_amount_min": null,
+        "amount_max": "282.38",
+        "pc_amount_max": null,
+        "amount_avg": "51.12",
+        "pc_amount_avg": null,
+        "date": "2026-07-14T00:00:00+02:00",
+        "end_date": "2026-10-17T00:00:00+02:00",
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 13,
+        "notes": "Kilo golf romeo oscar foxtrot tango golf echo delta delta mike sierra mike alpha delta sierra kilo tango charlie whiskey lima echo lima juliett echo quebec golf bravo whiskey mike delta alpha india tango juliett xray xray delta november juliett golf bravo juliett echo alpha bravo romeo kilo xray november tango whiskey hotel hotel kilo echo uniform charlie papa oscar sierra tang",
+        "object_group_id": null,
+        "object_group_order": 1,
+        "object_group_title": "Xray foxtrot lima vi",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-28T00:00:00+02:00",
+          "2026-09-17T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-09-01T00:00:00+02:00",
+        "next_expected_match_diff": "Uniform hotel papa golf r"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Charli"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/271"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4156",
+      "attributes": {
+        "created_at": "2026-09-21T00:00:00+02:00",
+        "updated_at": "2026-10-24T00:00:00+02:00",
+        "name": "Sierra yanke",
+        "object_has_currency_setting": true,
+        "currency_id": "4150",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4150",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "232.06",
+        "pc_amount_min": null,
+        "amount_max": "247.55",
+        "pc_amount_max": null,
+        "amount_avg": "40.43",
+        "pc_amount_avg": null,
+        "date": "2026-08-28T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 17,
+        "notes": "Zulu juliett tango zulu charlie delta victor kilo tango alpha juliett romeo golf bravo romeo india quebec romeo oscar kilo kilo uniform sierra romeo alpha november delta golf charlie alpha juliett november delta xray sierra hotel yankee lima sierra charlie foxtrot oscar delta yankee hotel charlie delta mike uniform echo yankee kilo lima xray victor oscar al",
+        "object_group_id": "4155",
+        "object_group_order": 1,
+        "object_group_title": null,
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-05T00:00:00+02:00",
+          "2026-10-24T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-10-28T00:00:00+02:00",
+        "next_expected_match_diff": "Xray lima victor z"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Kilo papa"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/845"
+      }
+    },
+    {
+      "type": "bills",
+      "id": "4175",
+      "attributes": {
+        "created_at": "2026-08-03T00:00:00+02:00",
+        "updated_at": "2026-07-14T00:00:00+02:00",
+        "name": "Lima xray foxtr",
+        "object_has_currency_setting": true,
+        "currency_id": "4166",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4166",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount_min": "123.19",
+        "pc_amount_min": null,
+        "amount_max": "456.16",
+        "pc_amount_max": null,
+        "amount_avg": "23.21",
+        "pc_amount_avg": null,
+        "date": "2026-07-28T00:00:00+02:00",
+        "end_date": null,
+        "extension_date": null,
+        "repeat_freq": "monthly",
+        "skip": 0,
+        "active": true,
+        "order": 21,
+        "notes": "India zulu november oscar india romeo papa india kilo lima romeo alpha alpha charlie india uniform india bravo oscar oscar alpha delta echo hotel kilo oscar victor xray uniform oscar lima hotel romeo mike romeo hotel india india whiskey tango november mike uniform hotel golf victor victor uniform india india india lima november uniform mike whiskey oscar tan",
+        "object_group_id": null,
+        "object_group_order": 1,
+        "object_group_title": "Oscar golf bravo julie",
+        "paid_dates": [],
+        "pay_dates": [
+          "2026-08-28T00:00:00+02:00"
+        ],
+        "next_expected_match": "2026-09-04T00:00:00+02:00",
+        "next_expected_match_diff": "Echo echo oscar unifo"
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Romeo tan"
+        },
+        "self": "https://firefly.example.com/api/v1/bills/73"
+      }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 23,
+      "count": 23,
+      "per_page": 50,
+      "current_page": 1,
+      "total_pages": 1
+    }
+  },
+  "links": {
+    "self": "https://firefly.example.com/api/v1/bills?page=1",
+    "first": "https://firefly.example.com/api/v1/bills?page=1",
+    "last": "https://firefly.example.com/api/v1/bills?page=1"
+  }
+}

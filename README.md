@@ -13,13 +13,15 @@ Claude  ──HTTPS──▶  Traefik  ──▶  FireflyMcpGateway  ──▶  
                                     Keycloak (authorization server)
 ```
 
-The gateway does three things and nothing else:
+The gateway does four things and nothing else:
 
 1. Serves RFC 9728 protected resource metadata so Claude can discover Keycloak.
 2. Rejects unauthenticated calls with a `401` carrying the `WWW-Authenticate`
    pointer Claude needs to start the OAuth flow.
 3. Validates the Keycloak access token, then swaps it for the Firefly III PAT on
    the way upstream.
+4. Slims Firefly III tool results on the way back, so they cost Claude less
+   context. See [Result slimming](#result-slimming).
 
 ## Verified behaviour
 
@@ -157,6 +159,49 @@ Every key is settable as an environment variable with `__` as the separator.
 | `Mcp__RequiredScope` | Optional. When set, a token without this scope gets a 403. Leave empty at first. |
 | `Upstream__Headers__<Name>` | Headers sent to the upstream MCP server, replacing whatever the caller sent. This is where the upstream's own credential goes. Secrets belong in the environment, never in `appsettings.json`. |
 | `ReverseProxy__Clusters__firefly-mcp__Destinations__primary__Address` | Upstream `firefly-iii-mcp` address. |
+| `Slimming__Enabled` | `true` by default. `false` passes every response through untouched. |
+| `Slimming__TransactionLayout` | `Objects` (default) or `Rows`: transactions as one table of columns and rows. |
+| `Slimming__Types__N`, `Slimming__DropFields__N`, `Slimming__DropFieldSuffixes__N`, `Slimming__KeepSplitFields__N` | Optional. Replace the default lists described under [Result slimming](#result-slimming). |
+
+## Result slimming
+
+`firefly-iii-mcp` returns every Firefly API response as one text block of JSON
+indented by two spaces, with about seventy fields per transaction, most of them
+null or repeated. A search returning 25 transactions came to 112,355 characters.
+The gateway slims those results before they reach Claude; on the fixtures in
+`tests/` that removes about 80% from transaction lists and 50–80% from accounts,
+bills, budgets and budget limits. Why it is done this way is in
+[ADR 0001](docs/adr/0001-slim-firefly-tool-results.md).
+
+What changes, in a result it recognises:
+
+* Indentation goes, and so do nulls, empty arrays and empty objects.
+* `pc_*`, `native_*` and `primary_currency_*` fields go when they equal the field
+  they convert, which they do when the primary currency is the currency.
+* Bookkeeping fields go: `links`, `created_at`, `updated_at`, `user`,
+  `user_group`, `object_has_currency_setting`, `import_hash_v2`, the currency
+  names and every `*_decimal_places` and `*_symbol` field.
+* Amounts lose trailing zeros beyond the currency's decimal places
+  (`"12.340000000000"` becomes `"12.34"`). The value never changes. Free-text
+  fields such as descriptions and notes are never touched.
+* Transaction splits keep only: `transaction_journal_id`, `type`, `date`,
+  `amount`, `currency_code`, `foreign_amount`, `foreign_currency_code`,
+  `description`, source and destination (`_id`, `_name`, `_type`), category,
+  budget and bill (`_id`, `_name`), `tags`, `notes`, `external_id` and the two
+  `*_balance_after` fields.
+
+A result is recognised by its shape: a `data` object, or a non-empty `data`
+array, whose items carry one of the types `transactions`, `accounts`, `bills`,
+`budgets`, `budget_limits`, `categories`, `tags` or `rules`. Everything else —
+error texts, empty lists, other object types, other upstreams such as Home
+Assistant — passes through byte for byte. So do non-2xx responses, compressed
+responses (the gateway stops asking the upstream for compression while slimming
+is on), responses over 8 MB, and GET streams.
+
+Results travel as JSON or as an event stream; in a stream only the `data` of
+each event changes, and its `event` and `id` fields stay as they are.
+
+Turning it off is `Slimming__Enabled=false`.
 
 ## Deploy
 
