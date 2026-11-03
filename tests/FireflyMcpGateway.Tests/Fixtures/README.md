@@ -20,5 +20,5 @@ was generated.
 | `list_budget_limit_by_budget.json` | `list_budget_limit_by_budget` | 4 |
 
 Under the same rules the fixtures and the live results slim by about the same amount
-(transaction lists 81–82%, the others 54–80%), which is what makes them a fair test of the
+(transaction lists 81–82%, the others 54–78%), which is what makes them a fair test of the
 size criteria.
