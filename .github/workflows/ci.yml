@@ -1,0 +1,42 @@
+name: CI
+
+# Build and test every pull request and every push to main. Publishing the
+# image stays in publish.yml.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Test
+        env:
+          SLIMMING_REPORT: ${{ runner.temp }}/slimming-report.md
+        run: >
+          dotnet test tests/FireflyMcpGateway.Tests/FireflyMcpGateway.Tests.csproj
+          --configuration Release
+          --logger "console;verbosity=normal"
+
+      - name: Size report
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/slimming-report.md" ]; then
+            cat "$RUNNER_TEMP/slimming-report.md"
+            cat "$RUNNER_TEMP/slimming-report.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # The image is what TrueNAS runs; make sure it still builds.
+      - name: Build image
+        run: docker build --tag firefly-mcp-gateway:ci .

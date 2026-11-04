@@ -1,0 +1,9 @@
+# Build output from a local or CI build must not reach the image build: an obj/
+# folder carries a project.assets.json that points at the host's NuGet cache and
+# breaks `dotnet publish --no-restore` inside the container.
+**/bin/
+**/obj/
+.git/
+.github/
+tests/
+docs/

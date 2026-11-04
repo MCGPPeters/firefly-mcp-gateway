@@ -1,0 +1,63 @@
+{
+  "data": {
+    "type": "accounts",
+    "id": "3707",
+    "attributes": {
+      "created_at": "2026-09-08T00:00:00+02:00",
+      "updated_at": "2026-10-23T00:00:00+02:00",
+      "active": true,
+      "order": 4,
+      "name": "Romeo bravo vic",
+      "type": "asset",
+      "account_role": "defaultAsset",
+      "object_group_id": null,
+      "object_group_order": null,
+      "object_group_title": null,
+      "object_has_currency_setting": true,
+      "currency_id": "3704",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_decimal_places": 2,
+      "primary_currency_id": "3704",
+      "primary_currency_name": "Euro",
+      "primary_currency_code": "EUR",
+      "primary_currency_symbol": "€",
+      "primary_currency_decimal_places": 2,
+      "current_balance": "-493.82",
+      "pc_current_balance": null,
+      "opening_balance": "-404.70",
+      "pc_opening_balance": null,
+      "virtual_balance": "456.27",
+      "pc_virtual_balance": null,
+      "debt_amount": null,
+      "pc_debt_amount": null,
+      "balance_difference": null,
+      "pc_balance_difference": null,
+      "current_balance_date": "2026-08-11T00:00:00+02:00",
+      "notes": "Hotel juliett lima alpha hotel uniform whiskey foxtrot papa echo foxtrot papa hotel india quebec kilo india yankee xray bravo tango xray golf sierra quebec oscar whiskey oscar romeo uniform yankee uniform papa xray uniform echo golf india echo kilo november mike lima",
+      "monthly_payment_date": null,
+      "credit_card_type": null,
+      "account_number": null,
+      "iban": "Delta oscar sierra brav",
+      "bic": null,
+      "opening_balance_date": "2026-08-14T00:00:00+02:00",
+      "liability_type": null,
+      "liability_direction": null,
+      "interest": null,
+      "interest_period": null,
+      "include_net_worth": true,
+      "longitude": null,
+      "latitude": null,
+      "zoom_level": null,
+      "last_activity": "2026-10-01T00:00:00+02:00"
+    },
+    "links": {
+      "0": {
+        "rel": "self",
+        "uri": "Lima victor"
+      },
+      "self": "https://firefly.example.com/api/v1/accounts/321"
+    }
+  }
+}

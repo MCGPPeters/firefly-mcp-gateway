@@ -1,0 +1,242 @@
+{
+  "data": [
+    {
+      "type": "budget_limits",
+      "id": "4415",
+      "attributes": {
+        "created_at": "2026-10-03T00:00:00+02:00",
+        "updated_at": "2026-09-07T00:00:00+02:00",
+        "start": "2026-07-26T00:00:00+02:00",
+        "end": "2026-10-21T00:00:00+02:00",
+        "budget_id": "4403",
+        "object_has_currency_setting": true,
+        "currency_id": "4404",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4404",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount": "453.14",
+        "pc_amount": null,
+        "period": "monthly",
+        "spent": [],
+        "pc_spent": [],
+        "notes": null
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Bravo zulu charlie sie"
+        },
+        "self": "https://firefly.example.com/api/v1/budget_limits/180"
+      },
+      "relationships": {
+        "budget": {
+          "links": {
+            "self": "https://firefly.example.com/api/v1/budget_limits/416",
+            "related": "https://firefly.example.com/api/v1/budget_limits/10"
+          },
+          "data": {
+            "type": "budgets",
+            "id": "4414"
+          }
+        }
+      }
+    },
+    {
+      "type": "budget_limits",
+      "id": "4446",
+      "attributes": {
+        "created_at": "2026-07-06T00:00:00+02:00",
+        "updated_at": "2026-10-24T00:00:00+02:00",
+        "start": "2026-09-09T00:00:00+02:00",
+        "end": "2026-09-12T00:00:00+02:00",
+        "budget_id": "4423",
+        "object_has_currency_setting": true,
+        "currency_id": "4432",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4432",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount": "333.57",
+        "pc_amount": null,
+        "period": "X",
+        "spent": [
+          {
+            "sum": "-157.470000000000",
+            "currency_id": "4444",
+            "currency_name": "Euro",
+            "currency_symbol": "€",
+            "currency_code": "EUR",
+            "currency_decimal_places": 2
+          }
+        ],
+        "pc_spent": [
+          {
+            "sum": "-157.470000000000",
+            "currency_id": "4444",
+            "currency_name": "Euro",
+            "currency_symbol": "€",
+            "currency_code": "EUR",
+            "currency_decimal_places": 2
+          }
+        ],
+        "notes": null
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Xray foxtrot mi"
+        },
+        "self": "https://firefly.example.com/api/v1/budget_limits/136"
+      },
+      "relationships": {
+        "budget": {
+          "links": {
+            "self": "https://firefly.example.com/api/v1/budget_limits/82",
+            "related": "https://firefly.example.com/api/v1/budget_limits/588"
+          },
+          "data": {
+            "type": "budgets",
+            "id": "4445"
+          }
+        }
+      }
+    },
+    {
+      "type": "budget_limits",
+      "id": "4472",
+      "attributes": {
+        "created_at": "2026-09-10T00:00:00+02:00",
+        "updated_at": "2026-08-01T00:00:00+02:00",
+        "start": "2026-10-11T00:00:00+02:00",
+        "end": "2026-10-28T00:00:00+02:00",
+        "budget_id": "4454",
+        "object_has_currency_setting": true,
+        "currency_id": "4460",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4460",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount": "6.42",
+        "pc_amount": null,
+        "period": "monthly",
+        "spent": [],
+        "pc_spent": [],
+        "notes": null
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Golf echo hotel"
+        },
+        "self": "https://firefly.example.com/api/v1/budget_limits/576"
+      },
+      "relationships": {
+        "budget": {
+          "links": {
+            "self": "https://firefly.example.com/api/v1/budget_limits/926",
+            "related": "https://firefly.example.com/api/v1/budget_limits/997"
+          },
+          "data": {
+            "type": "budgets",
+            "id": "4471"
+          }
+        }
+      }
+    },
+    {
+      "type": "budget_limits",
+      "id": "4496",
+      "attributes": {
+        "created_at": "2026-08-16T00:00:00+02:00",
+        "updated_at": "2026-10-10T00:00:00+02:00",
+        "start": "2026-09-01T00:00:00+02:00",
+        "end": "2026-08-01T00:00:00+02:00",
+        "budget_id": "4480",
+        "object_has_currency_setting": true,
+        "currency_id": "4483",
+        "currency_name": "Euro",
+        "currency_code": "EUR",
+        "currency_symbol": "€",
+        "currency_decimal_places": 2,
+        "primary_currency_id": "4483",
+        "primary_currency_name": "Euro",
+        "primary_currency_code": "EUR",
+        "primary_currency_symbol": "€",
+        "primary_currency_decimal_places": 2,
+        "amount": "462.03",
+        "pc_amount": null,
+        "period": "monthly",
+        "spent": [
+          {
+            "sum": "-499.140000000000",
+            "currency_id": "4493",
+            "currency_name": "Euro",
+            "currency_symbol": "€",
+            "currency_code": "EUR",
+            "currency_decimal_places": 2
+          }
+        ],
+        "pc_spent": [
+          {
+            "sum": "-499.140000000000",
+            "currency_id": "4493",
+            "currency_name": "Euro",
+            "currency_symbol": "€",
+            "currency_code": "EUR",
+            "currency_decimal_places": 2
+          }
+        ],
+        "notes": null
+      },
+      "links": {
+        "0": {
+          "rel": "self",
+          "uri": "Delta romeo wh"
+        },
+        "self": "https://firefly.example.com/api/v1/budget_limits/684"
+      },
+      "relationships": {
+        "budget": {
+          "links": {
+            "self": "https://firefly.example.com/api/v1/budget_limits/926",
+            "related": "https://firefly.example.com/api/v1/budget_limits/487"
+          },
+          "data": {
+            "type": "budgets",
+            "id": "4495"
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 4,
+      "count": 4,
+      "per_page": 50,
+      "current_page": 1,
+      "total_pages": 1
+    }
+  },
+  "links": {
+    "self": "https://firefly.example.com/api/v1/budgets/1001/limits?page=1",
+    "first": "https://firefly.example.com/api/v1/budgets/1001/limits?page=1",
+    "last": "https://firefly.example.com/api/v1/budgets/1001/limits?page=1"
+  }
+}
