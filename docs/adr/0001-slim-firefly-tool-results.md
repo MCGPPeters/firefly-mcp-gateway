@@ -1,6 +1,6 @@
 # ADR 0001: Slim Firefly III tool results in the gateway
 
-* Status: proposed
+* Status: accepted (2026-11-04)
 * Date: 2026-11-03
 
 ## Context
